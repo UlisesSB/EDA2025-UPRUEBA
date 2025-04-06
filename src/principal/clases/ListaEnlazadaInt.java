@@ -47,6 +47,7 @@ public class ListaEnlazadaInt {
     private Nodo colaNodo;
     /* variable que apunta al último nodo*/
     private int cantNodo;
+
     /* tamaño de la lista enlazada (cantidad de nodos)*/
 
  /* constructor de ListaEnlazada*/
@@ -169,5 +170,101 @@ public class ListaEnlazadaInt {
         this.cantNodo--;
         return this;
     }
-    
+
+    /*Determina si un elemento pertenece a la lista*/
+    public boolean pertenece(int buscado) {
+        Nodo actual = this.primerNodo;
+        while (actual != null) {
+            if (actual.getDato() == buscado) {
+                return true;
+            }
+            actual = actual.getSiguiente();
+        }
+        return false;
+    }
+
+    /* Elimina todos los nodos que contengan el valor igual a x */
+    public ListaEnlazadaInt borrarConValor(int buscado) {
+        while (this.primerNodo != null && this.primerNodo.getDato() == buscado) {
+            this.primerNodo = this.primerNodo.getSiguiente();
+            this.cantNodo--;
+        }
+
+        if (this.primerNodo == null) {
+            this.colaNodo = null;
+            return this;
+        }
+
+        Nodo actual = this.primerNodo;
+        while (actual.getSiguiente() != null) {
+            if (actual.getSiguiente().getDato() == buscado) {
+                actual.setSiguiente(actual.getSiguiente().getSiguiente());
+                this.cantNodo--;
+            } else {
+                actual = actual.getSiguiente();
+            }
+        }
+
+        // Actualizar colaNodo si es necesario
+        this.colaNodo = this.primerNodo;
+        while (this.colaNodo != null && this.colaNodo.getSiguiente() != null) {
+            this.colaNodo = this.colaNodo.getSiguiente();
+        }
+
+        return this;
+    }
+
+    /*Devuelve el contenido del nodo en la posición posicion*/
+    public int valorEnPosicion(int posicion) {
+        if (posicion < 0 || posicion >= this.cantNodo) {
+            throw new IndexOutOfBoundsException("Posición inválida.");
+        }
+
+        Nodo actual = this.primerNodo;
+        for (int i = 0; i < posicion; i++) {
+            actual = actual.getSiguiente();
+        }
+        return actual.getDato();
+    }
+
+    /*Modificar el contenido del nodo de la posición posicion*/
+    public ListaEnlazadaInt modificarValorEnPosicion(int valor, int posicion) {
+        if (posicion < 0 || posicion >= this.cantNodo) {
+            throw new IndexOutOfBoundsException("Posición inválida.");
+        }
+
+        Nodo actual = this.primerNodo;
+        for (int i = 0; i < posicion; i++) {
+            actual = actual.getSiguiente();
+        }
+
+        actual.setDato(valor);
+        return this;
+    }
+
+    /*Inserta un nodo en la posición posición con valor valor*/
+    public ListaEnlazadaInt insertarEnPosicion(int valor, int posicion) {
+        if (posicion < 0 || posicion > this.cantNodo) {
+            throw new IndexOutOfBoundsException("Posición inválida.");
+        }
+
+        if (posicion == 0) {
+            return insertarAlInicio(valor);
+        } else if (posicion == this.cantNodo) {
+            return insertarAlFinal(valor);
+        } else {
+            Nodo nuevoNodo = new Nodo(valor);
+            Nodo actual = this.primerNodo;
+
+            for (int i = 0; i < posicion - 1; i++) {
+                actual = actual.getSiguiente();
+            }
+
+            nuevoNodo.setSiguiente(actual.getSiguiente());
+            actual.setSiguiente(nuevoNodo);
+            this.cantNodo++;
+
+            return this;
+        }
+    }
 }
