@@ -97,14 +97,13 @@ public class Especificaciones {
     B)
     FUNCION cancionesEnComun(L1: Playlist, L2: Playlist): Playlist
     nueva ← crearPlaylist()
-    temp ← L1
 
-    mientras no esVacia(temp) hacer
-        c ← obtenerPrimeraCancion(temp)
+    mientras no esVacia(L1) hacer
+        c ← obtenerPrimeraCancion(L1)
         si contiene(c, L2) y no contiene(c, nueva) entonces
             nueva ← añadir(c, nueva)
         fin si
-    temp ← eliminarUltima(temp)
+    L1 ← eliminarUltima(L1)
     fin mientras
 
     retornar nueva

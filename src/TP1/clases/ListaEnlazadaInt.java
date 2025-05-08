@@ -16,7 +16,7 @@ public class ListaEnlazadaInt {
         /* atributos de Nodo*/
         private int dato;
         private Nodo siguiente;
-
+        
         /* constructor de Nodo*/
         public Nodo(int num) {
             this.dato = num;
@@ -49,7 +49,7 @@ public class ListaEnlazadaInt {
     private int cantNodo;
 
     /* tamaño de la lista enlazada (cantidad de nodos)*/
-
+        
  /* constructor de ListaEnlazada*/
     private ListaEnlazadaInt() {
         this.primerNodo = null;

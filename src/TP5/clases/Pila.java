@@ -62,6 +62,6 @@ public class Pila<T> {
             actual = actual.siguiente;
         }
         System.out.println("]");
-    }
+    } 
 }
 
