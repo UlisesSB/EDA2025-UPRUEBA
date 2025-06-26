@@ -178,14 +178,12 @@ public class Fila {
 
     static public Fila invertir(Fila fila1) {
         //Auxiliar para guardar temporalmente un elemento de la fila
-        Integer e1;
 
-        e1 = fila1.frente();
         if (fila1.esFilaVacia()) {
             return fila1;
-        } else {
-            return invertir(fila1.deFila()).enFila(e1);
         }
+        Integer e1 = fila1.frente();
+        return invertir(fila1.deFila()).enFila(e1);
     }
 
     public Fila dividir(int n) {
